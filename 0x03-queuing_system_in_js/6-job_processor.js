@@ -1,12 +1,17 @@
-const kue = require("kue");
-const queue = kue.createQueue();
+#!/usr/bin/yarn dev
+import { createQueue } from 'kue';
 
-function sendNotification(phoneNumber, message) {
-  console.log(`Sending notification to ${phoneNumber} with message: ${message}`);
-}
+const queue = createQueue();
 
-queue.create("push_notification_code", (job, done) => {
-  const {phoneNumber, message} = job.data;
-  sendNotification(phoneNumber, message);
+const sendNotification = (phoneNumber, message) => {
+  console.log(
+    `Sending notification to ${phoneNumber},`,
+    'with message:',
+    message,
+  );
+};
+
+queue.process('push_notification_code', (job, done) => {
+  sendNotification(job.data.phoneNumber, job.data.message);
   done();
 });
