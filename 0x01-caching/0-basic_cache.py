@@ -7,6 +7,7 @@
 
 BaseCaching = __import__('base_caching').BaseCaching
 
+
 class BasicCache(BaseCaching):
     """ Create a class BasicCache that inherits
         from BaseCaching and is a caching system:
@@ -26,7 +27,9 @@ class BasicCache(BaseCaching):
         self.cache_data[key] = item
 
     def get(self, key):
-        """ This method must return the value in self.cache_data linked to key."""
+        """ This method must return the value in
+            self.cache_data linked to key.
+        """
 
         if key is None or key not in self.cache_data:
             return None
